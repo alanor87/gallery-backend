@@ -1,5 +1,7 @@
-const getInterface = require('./getInterface');
+const getInterfaceSettings = require('./getInterface');
+const saveInterfaceSettings = require('./saveInterface');
 
 module.exports = {
-    getInterface
+    getInterfaceSettings,
+    saveInterfaceSettings
 };

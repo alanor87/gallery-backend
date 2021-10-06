@@ -19,6 +19,6 @@ app.use((_, res) => {
             code: '404',
             message: 'Not found!',
         })
-})
+});
 
 module.exports = app;

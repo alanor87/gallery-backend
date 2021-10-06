@@ -1,13 +1,13 @@
-const { Interface: interface } = require('../../models');
+const { Interface } = require('../../models');
 
-const getInterface = async (req, res, next) => {
+const getInterfaceSettings = async (req, res, next) => {
     try {
-        const interfaceSettings = await interface.find({});
-        res.json(interfaceSettings);
+        const interfaceSettings = await Interface.find({});
+        res.json(interfaceSettings[0]);
     }
     catch (error) {
         res.send(error);
     };
 };
 
-module.exports = getInterface;
+module.exports = getInterfaceSettings;
