@@ -1,9 +1,10 @@
 const { Interface } = require('../../models');
 
-const saveInterfaceSettings = async (req, res, next) => {
+const updateInterfaceSettings = async (req, res) => {
     try {
         const newInterfaceSettings = req.body;
-        const settings = await Interface.findByIdAndUpdate(newInterfaceSettings.id, newInterfaceSettings, { new: true });
+        console.log('newInterfaceSettings : ', newInterfaceSettings);
+        const settings = await Interface.findByIdAndUpdate(newInterfaceSettings._id, newInterfaceSettings, { new: true });
         res.status(200).json({
             code: 200,
             status: 'Interface saving success',
@@ -15,4 +16,4 @@ const saveInterfaceSettings = async (req, res, next) => {
     }
 };
 
-module.exports = saveInterfaceSettings;
+module.exports = updateInterfaceSettings;
