@@ -6,7 +6,7 @@ const getInterfaceSettings = async (req, res, next) => {
         res.json(interfaceSettings[0]);
     }
     catch (error) {
-        res.send(error);
+        next(error);
     };
 };
 

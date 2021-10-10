@@ -12,7 +12,8 @@ const updateInterfaceSettings = async (req, res) => {
         })
     }
     catch (error) {
-        res.send(error)
+        error.message = 'Error while updating interface settings.';
+        next(error);
     }
 };
 

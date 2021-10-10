@@ -1,11 +1,10 @@
 const { Image } = require("../../models");
 
-const updateOne = async (req, res) => {
+const updateOne = async (req, res, next) => {
+    const imageIdToUpdate = req.params.id;
     try {
-        const imageIdToUpdate = req.params.id;
         const newImageInfo = req.body;
         const updatedImage = await Image.findByIdAndUpdate(imageIdToUpdate, newImageInfo, { new: true });
-        console.log(updatedImage);
         res.status(200).json({
             code: 204,
             status: `ID ${imageIdToUpdate} updated successfully`,
@@ -13,7 +12,8 @@ const updateOne = async (req, res) => {
         })
     }
     catch (error) {
-        res.send(error);
+        error.message = `Error while updating image (ID : ${imageIdToUpdate} ).`
+        next(error);
     }
 }
 

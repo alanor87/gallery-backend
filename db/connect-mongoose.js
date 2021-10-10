@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const { DB_NAME, DB_USER, DB_PASS } = process.env;
 
 const DB_HOST = `mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.chh3o.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`;
-console.log(DB_HOST);
 const options = {
     promiseLibrary: global.Promise,
     useNewUrlParser: true,
