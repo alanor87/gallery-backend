@@ -1,5 +1,5 @@
-const { User } = require('../../models');
-const { getUser } = require('../../utils/');
+const { User } = require("../../models");
+const { getUser } = require("../../utils/");
 
 const register = async (req, res, next) => {
     try {
@@ -36,6 +36,15 @@ const register = async (req, res, next) => {
         error.message = `Error occured while creating user. ` + originalErrorMessage;
         next(error);
     }
+    const newUser = await User.create(req.body);
+
+    res.status(201).json({
+        status: "Success",
+        code: 201,
+        message: "User was created.",
+        data: newUser,
+    });
+
 };
 
 module.exports = register;
