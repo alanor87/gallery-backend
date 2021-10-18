@@ -15,13 +15,20 @@ const register = async (req, res, next) => {
                 })
             return;
         }
-        const newUser = await User.create(req.body);
+
+        const { userName, userEmail, userPassword } = req.body;
+        const newUser = new User({ userName, userEmail });
+        newUser.setHashedPassword(userPassword);
+        const newUserData = await newUser.save();
 
         res.status(201).json({
             status: 'Success',
             code: 201,
             message: 'User was created.',
-            data: newUser,
+            data: {
+                userName: newUserData.userName,
+                userEmail: newUserData.userEmail,
+            },
         })
     }
     catch (error) {

@@ -10,5 +10,4 @@ db.then(() => {
         console.log('Listening to the port!', PORT);
     });
 })
-    .catch(error => console.log(error))
-
+    .catch(error => console.log(error));

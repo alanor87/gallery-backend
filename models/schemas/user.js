@@ -1,4 +1,5 @@
 const { Schema } = require('mongoose');
+const bcryptjs = require('bcryptjs');
 
 const user = Schema({
     userName: {
@@ -18,9 +19,14 @@ const user = Schema({
     userToken: {
         type: String
     },
-    userIsAuthenticated: {
-        type: Boolean,
-    },
 });
+
+user.methods.setHashedPassword = function (rawPassword) {
+    this.userPassword = bcryptjs.hashSync(rawPassword, bcryptjs.genSaltSync(10));
+};
+
+user.methods.comparePassword = function (incomingPassword) {
+    return bcryptjs.compareSync(incomingPassword, this.userPassword);
+};
 
 module.exports = user;
