@@ -1,5 +1,7 @@
-const { User } = require('../../models');
+const jwt = require('jsonwebtoken');
+const { User } = require('../../models/')
 const { getUser } = require('../../utils');
+require('dotenv').config();
 
 const login = async (req, res, next) => {
     try {
@@ -12,17 +14,21 @@ const login = async (req, res, next) => {
                     message: 'Invalid email or password.',
                 });
 
+        const { _id, userName, userEmail } = requestedUser;
+        const userToken = jwt.sign({ _id }, process.env.SECRET_KEY);
+        await User.findOneAndUpdate({ _id }, { userToken: userToken });
+
         res.status(201)
             .json({
                 status: 'Logged in',
                 code: 201,
                 message: 'User is logged in.',
-                data: {
-                    userName: requestedUser.userName,
-                    userEmail: requestedUser.userEmail,
+                body: {
+                    userName: userName,
+                    userEmail: userEmail,
+                    userToken: userToken,
                 },
             });
-
 
     }
     catch (error) {

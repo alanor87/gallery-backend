@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const app = express();
 const api = require('./api');
+const { tokenValidation1 } = require('./middleware');
 
 app.use(cors());
 app.use(morgan('tiny'));
@@ -10,7 +11,7 @@ app.use(express.json());
 
 app.use('/api/v1/auth', api.auth);
 app.use('/api/v1/users', api.users);
-app.use('/api/v1/images', api.images);
+app.use('/api/v1/images', tokenValidation1, api.images);
 app.use('/api/v1/interface', api.interface);
 
 app.use((_, res) => {
