@@ -1,5 +1,7 @@
+const jwt = require('jsonwebtoken');
 const { User } = require("../../models");
 const { getUser } = require("../../utils/");
+require('dotenv').config();
 
 const register = async (req, res, next) => {
     try {
@@ -18,6 +20,7 @@ const register = async (req, res, next) => {
 
         const { userName, userEmail, userPassword } = req.body;
         const newUser = new User({ userName, userEmail });
+        const userToken = jwt.sign({ _id: newUser._id }, process.env.SECRET_KEY); // work on this place!!
         newUser.setHashedPassword(userPassword);
         const newUserData = await newUser.save();
 
