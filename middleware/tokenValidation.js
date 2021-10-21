@@ -1,20 +1,21 @@
-const passport = require('passport');
-const { ExtractJwt, Strategy } = require('passport-jwt');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const { SECRET_KEY } = process.env;
-const settings = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: SECRET_KEY,
-};
 
-passport.use(new Strategy(settings, async (payload, done) => {
-    console.log(payload);
-}))
+const tokenValidation = (req, res, next) => {
+    try {
+        const [_, token] = req.headers.authorization.split(' ');
+        const { _id } = jwt.verify(token, SECRET_KEY);
+        req.userId = _id;
+        next();
+    }
+    catch (error) {
+        const originalErrorMessage = error.message;
+        error.message = `Token validation error. ` + originalErrorMessage;
+        next(error);
+    }
 
-const tokenValidation = async (req, res, next) => {
-    console.log(req);
-    passport.authenticate("jwt", { session: false }, () => { });
-};
+}
 
 module.exports = { tokenValidation };

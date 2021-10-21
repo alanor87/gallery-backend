@@ -1,3 +1,4 @@
 
+const { logout } = require('../users/logout');
 
-module.exports = {};
+module.exports = { logout };
