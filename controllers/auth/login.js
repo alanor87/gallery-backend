@@ -14,7 +14,7 @@ const login = async (req, res, next) => {
                     message: 'Invalid email or password.',
                 });
 
-        const { _id, userName, userEmail } = requestedUser;
+        const { _id, userName, userEmail, userInterface } = requestedUser;
         const userToken = jwt.sign({ _id }, process.env.SECRET_KEY);
         await User.findOneAndUpdate({ _id }, { userToken: userToken });
 
@@ -27,6 +27,7 @@ const login = async (req, res, next) => {
                     userName: userName,
                     userEmail: userEmail,
                     userToken: userToken,
+                    userInterface: userInterface,
                 },
             });
 

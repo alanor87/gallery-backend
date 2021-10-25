@@ -13,7 +13,6 @@ passport.use(new Strategy(settings, async (payload, done) => {
 }))
 
 const tokenValidationPassport = async (req, res, next) => {
-    console.log(req);
     passport.authenticate("jwt", { session: false }, () => { });
 };
 

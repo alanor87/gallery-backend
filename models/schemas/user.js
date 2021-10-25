@@ -19,6 +19,25 @@ const user = Schema({
     userToken: {
         type: String
     },
+    userInterface: {
+
+        backgroundImage: {
+            type: String,
+            default: '',
+        },
+        lightThemeIsOn: {
+            type: Boolean,
+            default: false,
+        },
+        imagesPerPage: {
+            type: Number,
+            default: 10,
+        },
+        sidePanelIsOpen: {
+            type: Boolean,
+            default: false,
+        },
+    }
 });
 
 user.methods.setHashedPassword = function (rawPassword) {

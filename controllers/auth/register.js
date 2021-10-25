@@ -5,8 +5,9 @@ require('dotenv').config();
 
 const register = async (req, res, next) => {
     try {
-        const userEmailDoesExist = await getUser({ userEmail: req.body.userEmail });
-        const userNameDoesExist = await getUser({ userName: req.body.userName });
+        const { userName, userEmail, userPassword } = req.body;
+        const userEmailDoesExist = await getUser({ userEmail: userEmail });
+        const userNameDoesExist = await getUser({ userName: userName });
         if (userEmailDoesExist || userNameDoesExist) {
             res.
                 status(409).
@@ -16,21 +17,23 @@ const register = async (req, res, next) => {
                     message: 'User with this email or name already exists.'
                 })
             return;
-        }
+        };
 
-        const { userName, userEmail, userPassword } = req.body;
         const newUser = new User({ userName, userEmail });
-        const userToken = jwt.sign({ _id: newUser._id }, process.env.SECRET_KEY); // work on this place!!
         newUser.setHashedPassword(userPassword);
         const newUserData = await newUser.save();
+        const { _id } = newUserData;
+        const userToken = jwt.sign({ _id }, process.env.SECRET_KEY);
+        const userWithToken = await User.findOneAndUpdate({ _id }, { userToken: userToken }, { new: true });
 
         res.status(201).json({
             status: 'Success',
             code: 201,
             message: 'User was created.',
-            data: {
+            body: {
                 userName: newUserData.userName,
                 userEmail: newUserData.userEmail,
+                userToken: userWithToken.userToken,
             },
         })
     }
@@ -38,15 +41,7 @@ const register = async (req, res, next) => {
         const originalErrorMessage = error.message;
         error.message = `Error occured while creating user. ` + originalErrorMessage;
         next(error);
-    }
-    const newUser = await User.create(req.body);
-
-    res.status(201).json({
-        status: "Success",
-        code: 201,
-        message: "User was created.",
-        data: newUser,
-    });
+    };
 
 };
 
