@@ -23,7 +23,7 @@ const user = Schema({
 
         backgroundImage: {
             type: String,
-            default: '',
+            default: "https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072821_960_720.jpg",
         },
         lightThemeIsOn: {
             type: Boolean,

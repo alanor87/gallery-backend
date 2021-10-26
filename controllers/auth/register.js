@@ -30,11 +30,7 @@ const register = async (req, res, next) => {
             status: 'Success',
             code: 201,
             message: 'User was created.',
-            body: {
-                userName: newUserData.userName,
-                userEmail: newUserData.userEmail,
-                userToken: userWithToken.userToken,
-            },
+            body: userWithToken,
         })
     }
     catch (error) {
