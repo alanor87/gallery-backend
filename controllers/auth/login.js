@@ -16,14 +16,15 @@ const login = async (req, res, next) => {
 
         const { _id } = requestedUser;
         const userToken = jwt.sign({ _id }, process.env.SECRET_KEY);
-        const userWithToken = await User.findOneAndUpdate({ _id }, { userToken: userToken }, { new: true });
+        const userWithToken = await User.findOneAndUpdate({ _id }, { userToken: userToken }, { new: true }).populate('userOwnedImages');
+        const { userPassword, ...userDataToSend } = userWithToken.toObject();
 
         res.status(201)
             .json({
                 status: 'Logged in',
                 code: 201,
                 message: 'User is logged in.',
-                body: userWithToken,
+                body: userDataToSend,
             });
 
     }

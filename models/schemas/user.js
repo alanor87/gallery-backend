@@ -19,10 +19,10 @@ const user = Schema({
     userToken: {
         type: String
     },
-    userOwnedImages: {
-        type: Array,
-        default: [],
-    },
+    userOwnedImages: [{
+        type: Schema.Types.ObjectId,
+        ref: 'image',
+    }],
     userInterface: {
 
         backgroundImage: {

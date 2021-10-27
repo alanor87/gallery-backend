@@ -7,7 +7,7 @@ const getAll = async (req, res, next) => {
         res.json(allImages);
     }
     catch (error) {
-        error.message = `Error while updating images.`
+        error.message = `Error while loading images.`
         next(error);
     }
 };
