@@ -1,8 +1,9 @@
 const { Image: images } = require('../../models');
 
 const getAll = async (req, res, next) => {
+    const { userId } = req;
     try {
-        const allImages = await images.find({});
+        const allImages = await images.find({ belongsTo: userId });
         res.json(allImages);
     }
     catch (error) {

@@ -19,6 +19,10 @@ const user = Schema({
     userToken: {
         type: String
     },
+    userOwnedImages: {
+        type: Array,
+        default: [],
+    },
     userInterface: {
 
         backgroundImage: {

@@ -14,21 +14,16 @@ const login = async (req, res, next) => {
                     message: 'Invalid email or password.',
                 });
 
-        const { _id, userName, userEmail, userInterface } = requestedUser;
+        const { _id } = requestedUser;
         const userToken = jwt.sign({ _id }, process.env.SECRET_KEY);
-        await User.findOneAndUpdate({ _id }, { userToken: userToken });
+        const userWithToken = await User.findOneAndUpdate({ _id }, { userToken: userToken }, { new: true });
 
         res.status(201)
             .json({
                 status: 'Logged in',
                 code: 201,
                 message: 'User is logged in.',
-                body: {
-                    userName: userName,
-                    userEmail: userEmail,
-                    userToken: userToken,
-                    userInterface: userInterface,
-                },
+                body: userWithToken,
             });
 
     }
