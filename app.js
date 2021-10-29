@@ -5,7 +5,6 @@ const api = require('./api');
 const { tokenValidation } = require('./middleware');
 
 app.use(cors());
-app.use(morgan('tiny'));
 app.use(express.json());
 
 app.use('/api/v1/auth', api.auth);
