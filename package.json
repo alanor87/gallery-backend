@@ -5,7 +5,7 @@
   "main": "./bin/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./bin/server.js"
+    "start": "node ./bin/server.js"
   },
   "keywords": [],
   "author": "alanor <jonny.freeman@gmail.com>",
@@ -26,7 +26,6 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "morgan": "^1.10.0",
-    "nodemon": "^2.0.12"
+    "morgan": "^1.10.0"
   }
 }
