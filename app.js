@@ -20,7 +20,8 @@ app.use((_, res) => {
             status: 'error',
             code: '404',
             message: 'Not found!',
-        })
+        });
+    return;
 });
 
 app.use((error, _, res, __) => {

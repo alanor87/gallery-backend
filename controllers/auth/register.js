@@ -25,12 +25,13 @@ const register = async (req, res, next) => {
         const { _id } = newUserData;
         const userToken = jwt.sign({ _id }, process.env.SECRET_KEY);
         const userWithToken = await User.findOneAndUpdate({ _id }, { userToken: userToken }, { new: true });
+        const { userPassword: notSendingBack, ...userDataToSend } = userWithToken.toObject(); // analog of getSnapshot in MST))
 
         res.status(201).json({
             status: 'Success',
             code: 201,
             message: 'User was created.',
-            body: userWithToken,
+            body: userDataToSend,
         })
     }
     catch (error) {

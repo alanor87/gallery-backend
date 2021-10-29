@@ -6,13 +6,15 @@ require('dotenv').config();
 const login = async (req, res, next) => {
     try {
         const requestedUser = await getUser({ userEmail: req.body.userEmail });
-        if (!requestedUser || !requestedUser.comparePassword(req.body.userPassword))
+        if (!requestedUser || !requestedUser.comparePassword(req.body.userPassword)) {
             res.status(403)
                 .json({
                     status: 'Forbidden',
                     code: 403,
                     message: 'Invalid email or password.',
                 });
+            return;
+        }
 
         const { _id } = requestedUser;
         const userToken = jwt.sign({ _id }, process.env.SECRET_KEY);
