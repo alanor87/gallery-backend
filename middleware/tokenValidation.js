@@ -4,17 +4,29 @@ require('dotenv').config();
 
 const { SECRET_KEY } = process.env;
 
-const tokenValidation = (req, res, next) => {
+const tokenValidation = async (req, res, next) => {
     try {
         const [_, token] = req.headers.authorization.split(' ');
         const { _id } = jwt.verify(token, SECRET_KEY);
-        const user = getUser({ _id });
+        const user = await getUser({ _id });
 
-        if (!user) res.status(404).json({
-            status: 'Not found.',
-            code: 404,
-            message: 'User with current ID was not found'
-        });
+        if (!user) {
+            res.status(404).json({
+                status: 'Not found.',
+                code: 404,
+                message: 'User with current ID was not found'
+            });
+            return;
+        };
+
+        if (user.userToken !== token) {
+            res.status(403).json({
+                status: 'Forbidden.',
+                code: 403,
+                message: 'Invalid token.'
+            })
+            return;
+        }
 
         req.userId = _id;
         next();
