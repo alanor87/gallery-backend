@@ -2,8 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const api = require('./api');
+const morgan = require('morgan');
 const { tokenValidation } = require('./middleware');
 
+app.use(morgan('tiny'));
 app.use(cors());
 app.use(express.json());
 
