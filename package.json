@@ -5,12 +5,13 @@
   "main": "./bin/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./bin/server.js"
+    "start": "nodemon ./bin/server.js"
   },
   "keywords": [],
   "author": "alanor <jonny.freeman@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.24.0",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.27.1",
     "connect-flash": "^0.1.1",
@@ -22,6 +23,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.8",
     "morgan": "^1.10.0",
+    "nodemon": "^2.0.14",
     "passport": "^0.5.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0"

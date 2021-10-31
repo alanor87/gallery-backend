@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { images } = require('../controllers');
 
-router.post('/', images.createOne);
+router.post('/upload', images.createOne);
 router.get('/', images.getAll);
 router.get('/:id', images.getOne);
 router.put('/:id', images.updateOne);
