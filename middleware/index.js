@@ -1,3 +1,4 @@
 const { tokenValidation } = require('./tokenValidation');
+const { filesUploadHandler } = require('./multer');
 
-module.exports = { tokenValidation };
+module.exports = { tokenValidation, filesUploadHandler };

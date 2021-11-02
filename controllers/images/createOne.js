@@ -1,13 +1,18 @@
 const { Image } = require("../../models");
+const imgbb = require('imgbb-uploader');
+require('dotenv').config();
+
+const { IMGBB_API_KEY } = process.env;
 
 
 const createOne = async (req, res, next) => {
     try {
+        const responseFromImgbb = await imgbb(IMGBB_API_KEY, req.file.path);
         res.status(201).json({
             status: 'Success',
             code: 201,
             message: 'Image created.',
-            body: req.file,
+            body: responseFromImgbb,
         });
     }
     catch (error) {
