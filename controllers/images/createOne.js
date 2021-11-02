@@ -1,16 +1,13 @@
 const { Image } = require("../../models");
-const axios = require('axios');
+
 
 const createOne = async (req, res, next) => {
     try {
-        const imageToCreate = req.body;
-
-        // const newImage = await Image.create(imageToCreate);
         res.status(201).json({
             status: 'Success',
             code: 201,
             message: 'Image created.',
-            body: imageToCreate,
+            body: req.file,
         });
     }
     catch (error) {
