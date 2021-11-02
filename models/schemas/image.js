@@ -6,6 +6,10 @@ const imageSchema = Schema(
             type: String,
             required: [true, 'Image URL is required']
         },
+        smallImageURL: {
+            type: String,
+            required: [true, 'Image thumb URL is required']
+        },
         imageInfo: {
             tags: {
                 type: [String],
@@ -23,7 +27,7 @@ const imageSchema = Schema(
         belongsTo: {
             type: String,
             default: '',
-            required: Boolean,
+            required: true,
         }
     },
     { versionKey: false, timeStamps: true },
