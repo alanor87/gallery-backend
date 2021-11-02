@@ -2,7 +2,7 @@ const router = require('express').Router();
 const path = require('path');
 const { images } = require('../controllers');
 const imgStorePath = path.join(process.cwd(), "uploads");
-const multer = require('multer')();
+const multer = require('multer')({dest: imgStorePath});
 
 console.log('imgStorePath : ', imgStorePath);
 
