@@ -9,6 +9,7 @@ const { IMGBB_API_KEY } = process.env;
 const createOne = async (req, res, next) => {
     try {
         const responseFromImgbb = await imgbb(IMGBB_API_KEY, req.file.path);
+        console.log(responseFromImgbb);
         unlink(req.newFilePath);
         const { display_url: smallImageURL } = responseFromImgbb;
         const { url: imageURL } = responseFromImgbb.image;
