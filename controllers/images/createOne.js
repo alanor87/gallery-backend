@@ -1,5 +1,4 @@
 const { User, Image } = require("../../models");
-const { unlink } = require('fs/promises');
 const imgbb = require('imgbb-uploader');
 require('dotenv').config();
 
@@ -9,8 +8,6 @@ const { IMGBB_API_KEY } = process.env;
 const createOne = async (req, res, next) => {
     try {
         const responseFromImgbb = await imgbb(IMGBB_API_KEY, req.file.path);
-        console.log(responseFromImgbb);
-        unlink(req.newFilePath);
         const { display_url: smallImageURL } = responseFromImgbb;
         const { url: imageURL } = responseFromImgbb.image;
         const { userId } = req;
