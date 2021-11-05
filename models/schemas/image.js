@@ -8,7 +8,6 @@ const imageSchema = Schema(
         },
         smallImageURL: {
             type: String,
-            required: [true, 'Image thumb URL is required']
         },
         imageInfo: {
             tags: {

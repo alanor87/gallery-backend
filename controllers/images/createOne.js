@@ -1,19 +1,27 @@
 const { User, Image } = require("../../models");
-const imgbb = require('imgbb-uploader');
 require('dotenv').config();
+const cloudinary = require('cloudinary').v2;
 
-const { IMGBB_API_KEY } = process.env;
+// Using CLOUDINARY_URL in .env, which includes all of the following!
+// const { CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET } = process.env;
+// cloudinary.config({
+//     cloud_name: CLOUDINARY_CLOUD_NAME,
+//     api_key: CLOUDINARY_API_KEY,
+//     api_secret: CLOUDINARY_API_SECRET,
+// })
 
 
 const createOne = async (req, res, next) => {
     try {
-        const responseFromImgbb = await imgbb(IMGBB_API_KEY, req.file.path);
-        const { display_url: smallImageURL } = responseFromImgbb;
-        const { url: imageURL } = responseFromImgbb.image;
+
+        const responseFromImgHosting = await cloudinary.uploader.upload(req.file.path);
+        console.log('responseFromImgHosting : ', responseFromImgHosting);
+        const { url: imageURL } = responseFromImgHosting;
+        console.log('imageURL : ', imageURL);
         const { userId } = req;
+        console.log('userId : ', userId);
         const newImage = await Image.create({
             imageURL,
-            smallImageURL,
             belongsTo: userId,
             imageInfo: {
                 tags: [],
@@ -29,6 +37,7 @@ const createOne = async (req, res, next) => {
         });
     }
     catch (error) {
+        console.log('error : ', error);
         error.message = `Error while creating image.`
         next(error);
     }
