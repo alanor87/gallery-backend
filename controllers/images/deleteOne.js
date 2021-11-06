@@ -1,10 +1,13 @@
-const { Image } = require("../../models");
+const { User, Image } = require("../../models");
+const { cloudinary } = require('../../utils');
 
 const deleteOne = async (req, res, next) => {
-    const imageIdToDelete = req.params.id;
+    const { id, imgHostingId } = req.params;
     try {
-        console.log('id : ', imageIdToDelete);
-        await Image.findByIdAndDelete(imageIdToDelete);
+        await User.findOneAndUpdate({ _id: req.userId }, { $pull: { 'userOwnedImages': id } });
+        await Image.findByIdAndDelete(id);
+        await cloudinary.api.delete_resources(imgHostingId);
+
         res.status(200).json({
             status: 'Success',
             code: 200,

@@ -6,6 +6,9 @@ const imageSchema = Schema(
             type: String,
             required: [true, 'Image URL is required']
         },
+        imageHostingId: {
+            type: String,
+        },
         smallImageURL: {
             type: String,
         },
