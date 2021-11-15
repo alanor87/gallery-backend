@@ -3,12 +3,12 @@ const { cloudinary } = require('../../utils');
 
 const createOne = async (req, res, next) => {
     try {
-        console.log('req.files : ', req.files);
+        const { userId } = req;
         const newImages = [];
+        const newImagesIds = []; ``
         for (let i = 0; i < req.files.length; i += 1) {
             const singleImageUploadResponse = await cloudinary.uploader.upload(req.files[i].path);
             const { url: imageURL, public_id: imageHostingId } = singleImageUploadResponse;
-            const { userId } = req;
             const newImage = await Image.create({
                 imageURL,
                 imageHostingId,
@@ -18,9 +18,11 @@ const createOne = async (req, res, next) => {
                     likes: [],
                 },
             });
-            await User.findOneAndUpdate({ _id: userId }, { $push: { 'userOwnedImages': newImage._id } });
             newImages.push(newImage);
+            newImagesIds.push(newImage._id);
         }
+
+        await User.findOneAndUpdate({ _id: userId }, { $push: { 'userOwnedImages': { $each: newImagesIds } } });
 
         res.status(201).json({
             status: 'Success',
