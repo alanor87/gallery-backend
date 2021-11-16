@@ -32,7 +32,7 @@ const createOne = async (req, res, next) => {
         });
     }
     catch (error) {
-        error.message = `Error while creating image.`
+        error.message += `Error while creating image.`
         next(error);
     }
 
