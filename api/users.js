@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const { users } = require('../controllers');
 
+
+router.get('/getUserByToken', users.getUserByToken);
 router.patch("/interface", users.saveInterface);
 router.get("/logout", users.logout);
 
