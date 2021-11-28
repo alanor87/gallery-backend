@@ -7,5 +7,6 @@ router.get('/', images.getAll);
 router.get('/:id', images.getOne);
 router.put('/:id', images.updateOne);
 router.delete('/:id/:imgHostingId', images.deleteOne);
+router.post('/deleteMultiple', images.deleteMultiple);
 
 module.exports = router;
