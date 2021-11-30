@@ -35,7 +35,7 @@ const deleteMultiple = async (req, res, next) => {
     const { userOwnedImages } = currentUser;
     console.log("currentUserOwnedImages : ", userOwnedImages);
     const newUserOwnedImagesList = userOwnedImages.filter(
-      (imageId) => !deleteIdList.includes(imageId)
+      (imageId) => !deleteIdList.includes(String(imageId))
     );
     console.log("newUserOwnedImagesList : ", newUserOwnedImagesList);
     currentUser.userOwnedImages = newUserOwnedImagesList;
