@@ -30,6 +30,10 @@ const imageSchema = Schema(
             type: String,
             default: '',
             required: true,
+        },
+        openedTo: {
+            type: [String],
+            default: [],
         }
     },
     { versionKey: false, timeStamps: true },
