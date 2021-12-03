@@ -1,6 +1,5 @@
 const { Image, User } = require("../../models");
 const { cloudinary } = require("../../utils");
-const { getUser } = require("../../utils");
 
 const deleteMultiple = async (req, res, next) => {
   try {
@@ -17,7 +16,6 @@ const deleteMultiple = async (req, res, next) => {
       Image.findByIdAndDelete(_id)
     );
     const resultDB = await Promise.all(deleteDBRequests);
-    console.log("Delete from DB : ", resultDB);
 
     /*
      * Deleting images from hosting.
@@ -26,21 +24,17 @@ const deleteMultiple = async (req, res, next) => {
       cloudinary.api.delete_resources(hostingId)
     );
     const resultHosting = await Promise.all(deleteHostingRequests);
-    console.log("Delete from hosting : ", resultHosting);
 
     /*
      * Deleting images IDs from userOwnedImages in User object.
      */
     const currentUser = await User.findById(req.userId);
     const { userOwnedImages } = currentUser;
-    console.log("currentUserOwnedImages : ", userOwnedImages);
     const newUserOwnedImagesList = userOwnedImages.filter(
       (imageId) => !deleteIdList.includes(String(imageId))
     );
-    console.log("newUserOwnedImagesList : ", newUserOwnedImagesList);
     currentUser.userOwnedImages = newUserOwnedImagesList;
     const updatedUser = await currentUser.save();
-    console.log("updatedUser : ", updatedUser);
 
     res.status(200).json({
       status: "Success",
