@@ -2,12 +2,11 @@ const router = require("express").Router();
 const { images } = require("../controllers");
 const { filesUploadHandler } = require("../middleware");
 
-router.post("/upload", filesUploadHandler.array("images", 5), images.createOne);
+router.post("/upload", filesUploadHandler.array("images", 5), images.uploadImages);
 router.get("/", images.getAll);
 router.get("/:id", images.getOne);
 router.put("/:id", images.updateOne);
 router.put("/updateMultiple", images.updateMultiple);
-router.delete("/:id/:imgHostingId", images.deleteOne);
-router.post("/deleteMultiple", images.deleteMultiple);
+router.post("/deleteImages", images.deleteImages);
 
 module.exports = router;

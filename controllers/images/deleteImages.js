@@ -1,7 +1,7 @@
 const { Image, User } = require("../../models");
 const { cloudinary } = require("../../utils");
 
-const deleteMultiple = async (req, res, next) => {
+const deleteImages = async (req, res, next) => {
   try {
     const { imagesToDelete } = req.body;
     const deleteIdList = imagesToDelete.map((image) => image.selectedId);
@@ -15,7 +15,7 @@ const deleteMultiple = async (req, res, next) => {
     const deleteDBRequests = deleteIdList.map((_id) =>
       Image.findByIdAndDelete(_id)
     );
-    const resultDB = await Promise.all(deleteDBRequests);
+    await Promise.all(deleteDBRequests);
 
     /*
      * Deleting images from hosting.
@@ -23,7 +23,7 @@ const deleteMultiple = async (req, res, next) => {
     const deleteHostingRequests = deleteHostingIdList.map((hostingId) =>
       cloudinary.api.delete_resources(hostingId)
     );
-    const resultHosting = await Promise.all(deleteHostingRequests);
+    await Promise.all(deleteHostingRequests);
 
     /*
      * Deleting images IDs from userOwnedImages in User object.
@@ -48,4 +48,4 @@ const deleteMultiple = async (req, res, next) => {
   }
 };
 
-module.exports = deleteMultiple;
+module.exports = deleteImages;

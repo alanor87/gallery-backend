@@ -23,6 +23,10 @@ const user = Schema({
         type: Schema.Types.ObjectId,
         ref: 'image',
     }],
+    userOpenedToImages: [{
+        type: Schema.Types.ObjectId,
+        ref: 'image',
+    }],
     userInterface: {
 
         backgroundImage: {

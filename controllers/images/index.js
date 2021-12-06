@@ -1,17 +1,15 @@
-const createOne = require("./createOne");
+const uploadImages = require("./uploadImages");
 const getOne = require("./getOne");
 const getAll = require("./getAll");
 const updateOne = require("./updateOne");
-const deleteOne = require("./deleteOne");
 const updateMultiple = require("./updateMultiple");
-const deleteMultiple = require("./deleteMultiple");
+const deleteImages = require("./deleteImages");
 
 module.exports = {
-  createOne,
+  uploadImages,
   getAll,
   getOne,
   updateOne,
   updateMultiple,
-  deleteOne,
-  deleteMultiple,
+  deleteImages,
 };

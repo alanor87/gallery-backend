@@ -19,7 +19,7 @@ const login = async (req, res, next) => {
         const { _id } = requestedUser;
         const userToken = jwt.sign({ _id }, process.env.SECRET_KEY, { expiresIn: '5h' });
         const userWithToken = await User.findOneAndUpdate({ _id }, { userToken: userToken }, { new: true }).populate('userOwnedImages');
-        const { userPassword, ...userDataToSend } = userWithToken.toObject(); // analog of getSnapshot in MST))
+        const { userPassword, userOpenedToImages, ...userDataToSend } = userWithToken.toObject(); // analog of getSnapshot in MST))
 
         res.status(201)
             .json({

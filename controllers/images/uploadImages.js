@@ -1,7 +1,7 @@
 const { User, Image } = require("../../models");
 const { cloudinary } = require("../../utils");
 
-const createOne = async (req, res, next) => {
+const uploadImages = async (req, res, next) => {
   try {
     const { userId } = req;
     const newImages = [];
@@ -42,4 +42,4 @@ const createOne = async (req, res, next) => {
   }
 };
 
-module.exports = createOne;
+module.exports = uploadImages;
