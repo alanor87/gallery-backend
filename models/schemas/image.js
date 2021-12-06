@@ -28,7 +28,7 @@ const imageSchema = Schema(
       },
       isPublic: {
         type: Boolean,
-        default: false,
+        default: true,
       },
       openedTo: {
         type: [String],
