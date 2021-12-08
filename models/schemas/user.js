@@ -23,7 +23,7 @@ const user = Schema({
         type: Schema.Types.ObjectId,
         ref: 'image',
     }],
-    userOpenedToImages: [{
+    imagesOpenedToUser: [{
         type: Schema.Types.ObjectId,
         ref: 'image',
     }],

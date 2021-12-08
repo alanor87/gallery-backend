@@ -12,18 +12,12 @@ const deleteImages = async (req, res, next) => {
     /*
      * Deleting images from DB.
      */
-    const deleteDBRequests = deleteIdList.map((_id) =>
-      Image.findByIdAndDelete(_id)
-    );
-    await Promise.all(deleteDBRequests);
+    await Image.deleteMany({ _id: { $in: deleteIdList } })
 
     /*
      * Deleting images from hosting.
      */
-    const deleteHostingRequests = deleteHostingIdList.map((hostingId) =>
-      cloudinary.api.delete_resources(hostingId)
-    );
-    await Promise.all(deleteHostingRequests);
+    await cloudinary.api.delete_resources(deleteHostingIdList)
 
     /*
      * Deleting images IDs from userOwnedImages in User object.
@@ -43,6 +37,7 @@ const deleteImages = async (req, res, next) => {
       newImagesList: updatedUser.userOwnedImages,
     });
   } catch (error) {
+    console.log('Error while deleting : ', error);
     error.message = "Error while deleting multiple images.";
     next(error);
   }
