@@ -12,23 +12,21 @@ const deleteImages = async (req, res, next) => {
     /*
      * Deleting images from DB.
      */
-    await Image.deleteMany({ _id: { $in: deleteIdList } })
+    await Image.deleteMany({ _id: { $in: deleteIdList } });
 
     /*
      * Deleting images from hosting.
      */
-    await cloudinary.api.delete_resources(deleteHostingIdList)
+    await cloudinary.api.delete_resources(deleteHostingIdList);
 
     /*
      * Deleting images IDs from userOwnedImages in User object.
      */
-    const currentUser = await User.findById(req.userId);
-    const { userOwnedImages } = currentUser;
-    const newUserOwnedImagesList = userOwnedImages.filter(
-      (imageId) => !deleteIdList.includes(String(imageId))
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: req.userId },
+      { $pullAll: { userOwnedImages: deleteIdList } },
+      { new: true }
     );
-    currentUser.userOwnedImages = newUserOwnedImagesList;
-    const updatedUser = await currentUser.save();
 
     res.status(200).json({
       status: "Success",
@@ -37,7 +35,7 @@ const deleteImages = async (req, res, next) => {
       newImagesList: updatedUser.userOwnedImages,
     });
   } catch (error) {
-    console.log('Error while deleting : ', error);
+    console.log("Error while deleting : ", error);
     error.message = "Error while deleting multiple images.";
     next(error);
   }
