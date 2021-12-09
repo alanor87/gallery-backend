@@ -4,7 +4,7 @@ const { filesUploadHandler } = require("../middleware");
 
 router.post(
   "/upload",
-  filesUploadHandler.array("images", 50),
+  filesUploadHandler.array("images", 5),
   images.uploadImages
 );
 router.get("/", images.getAll);

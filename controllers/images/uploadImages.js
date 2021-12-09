@@ -11,7 +11,7 @@ const uploadImages = async (req, res, next) => {
       const singleImageUploadResponse = await cloudinary.uploader.upload(
         req.files[i].path
       );
-      const { url: imageURL, public_id: imageHostingId } =
+      const { secure_url: imageURL, public_id: imageHostingId } =
         singleImageUploadResponse;
       const newImage = await Image.create({
         imageURL,
