@@ -10,6 +10,7 @@ router.post(
 router.get("/", images.getAll);
 router.get("/:id", images.getOne);
 router.put("/updateImages", images.updateImages);
+router.post("/multiuserShare", images.multiuserShare);
 router.post("/deleteImages", images.deleteImages);
 
 module.exports = router;
