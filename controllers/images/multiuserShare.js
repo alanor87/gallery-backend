@@ -39,7 +39,7 @@ const multiuserShare = async (req, res, next) => {
       { $pullAll: { imagesOpenedToUser: imagesIdList } }
     );
     res.status(200).json({
-      message: "Sharing successful",
+      message: "Sharing successful.",
     });
   } catch (error) {
     console.log(error);
