@@ -28,7 +28,7 @@ const multiuserShare = async (req, res, next) => {
      */
     await User.updateMany(
       { userName: { $in: usersSharedWith } },
-      { $addToSet: { imagesOpenedToUser: { $each: imagesIdList } } }
+      { $addToSet: { userOpenedToImages: { $each: imagesIdList } } }
     );
 
     /*
@@ -36,7 +36,7 @@ const multiuserShare = async (req, res, next) => {
      */
     await User.updateMany(
       { userName: { $in: usersNotSharedWith } },
-      { $pullAll: { imagesOpenedToUser: imagesIdList } }
+      { $pullAll: { userOpenedToImages: imagesIdList } }
     );
     res.status(200).json({
       message: "Sharing successful.",

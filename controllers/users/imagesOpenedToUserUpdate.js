@@ -1,5 +1,3 @@
-const { User } = require('../../models')
+const { User } = require("../../models");
 
-const imagesOpenedToUserUpdate = async (req, res, next) => {
-
-}
+const userOpenedToImagesUpdate = async (req, res, next) => {};

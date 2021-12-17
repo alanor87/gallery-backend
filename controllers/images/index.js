@@ -1,13 +1,15 @@
 const uploadImages = require("./uploadImages");
 const getOne = require("./getOne");
-const getAll = require("./getAll");
+const getUserOwnedImages = require("./getUserOwnedImages");
+const getUserOpenedToImages = require("./getUserOpenedToImages");
 const updateImages = require("./updateImages");
 const multiuserShare = require("./multiuserShare");
 const deleteImages = require("./deleteImages");
 
 module.exports = {
   uploadImages,
-  getAll,
+  getUserOwnedImages,
+  getUserOpenedToImages,
   getOne,
   updateImages,
   multiuserShare,

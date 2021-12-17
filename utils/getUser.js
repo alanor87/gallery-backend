@@ -1,11 +1,12 @@
 const { User } = require("../models");
 
-/* Returning user instance either as it is - or with all the user owned image objects.
- * Good to have the option to avoid overfetching.
+/*
+ * Returning user instance either as it is.
  */
-const getUser = async (filter, populate = true) => {
+
+const getUser = async (filter) => {
   const user = await User.findOne(filter);
-  return populate ? user.populate("userOwnedImages") : user;
+  return user;
 };
 
 module.exports = getUser;
