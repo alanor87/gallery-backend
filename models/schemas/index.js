@@ -1,9 +1,11 @@
-const imageSchema = require('./image');
-const userSchema = require('./user');
-const interfaceSchema = require('./interface');
+const publicSettingSchema = require("./publicsSetting");
+const imageSchema = require("./image");
+const userSchema = require("./user");
+const interfaceSchema = require("./interface");
 
 module.exports = {
-    imageSchema,
-    userSchema,
-    interfaceSchema
-}
+  publicSettingSchema,
+  imageSchema,
+  userSchema,
+  interfaceSchema,
+};

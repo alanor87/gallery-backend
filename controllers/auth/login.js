@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-const { User } = require("../../models/");
 const { getUser } = require("../../utils");
 require("dotenv").config();
 
@@ -23,7 +22,6 @@ const login = async (req, res, next) => {
       expiresIn: "5h",
     });
     requestedUser.userToken = userToken;
-    // await requestedUser.populate("userOwnedImages");
     const userWithToken = await requestedUser.save();
     const { userPassword, ...userDataToSend } = userWithToken.toObject(); // analog of getSnapshot in MST))
 
