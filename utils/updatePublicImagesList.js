@@ -23,7 +23,8 @@ async function updatePublicImagesList(imagesToUpdate) {
       { $addToSet: { publicImagesList: { $each: imagesToAdd } } }
     );
   } catch (error) {
-    console.log(error);
+    error.message = `Error while updating public images list, ${error.message}`;
+    throw error;
   }
 }
 
