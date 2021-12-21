@@ -3,7 +3,7 @@ const { PublicSetting } = require("../../models");
 async function getPublicImages(req, res, next) {
   try {
     const publicSettings = await PublicSetting.findOne({});
-    await publicSettings.populate("publicImagesList");
+    await publicSettings.populate("publicImagesList", "-imageHostingId");
     console.log(publicSettings.publicImagesList);
     res.status(200).json({
       message: "Success getting public images.",
