@@ -38,8 +38,8 @@ const uploadImages = async (req, res, next) => {
       newImages,
     });
   } catch (error) {
-    console.log(error)
-    error.message += `Error while creating image.`;
+    console.log((error.message += "Error while creating image."));
+    error.message += "Error while creating image.";
     next(error);
   }
 };

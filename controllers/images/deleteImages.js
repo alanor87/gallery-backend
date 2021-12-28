@@ -20,6 +20,14 @@ const deleteImages = async (req, res, next) => {
     await cloudinary.api.delete_resources(deleteHostingIdList);
 
     /*
+     * Deleting images IDs from userOpenedToImages in User object.
+     */
+    await User.updateMany(
+      {},
+      { $pullAll: { userOpenedToImages: deleteIdList } }
+    );
+
+    /*
      * Deleting images IDs from userOwnedImages in User object.
      */
     const updatedUser = await User.findOneAndUpdate(

@@ -1,13 +1,12 @@
-const { User } = require('../../models');
+const { User } = require("../../models");
 
-const logout = async (req, res, next) => {
-    console.log('Logout req.userId : ', req.userId);
-    await User.findOneAndUpdate({ _id: req.userId }, { userToken: '' });
-    res.status(200).json({
-        status: 'Success',
-        code: 200,
-        message: 'Logout success.',
-    });
+const logout = async (req, res) => {
+  await User.findOneAndUpdate({ _id: req.userId }, { userToken: "" });
+  res.status(200).json({
+    status: "Success",
+    code: 200,
+    message: "Logout success.",
+  });
 };
 
 module.exports = { logout };

@@ -24,7 +24,7 @@ const multiuserShare = async (req, res, next) => {
     });
 
     /*
-     *  Adding imagesID to those users, whom this image was shared with.
+     *  Adding imagesID to those users, whom these images were shared with.
      */
     await User.updateMany(
       { userName: { $in: usersSharedWith } },
@@ -38,11 +38,15 @@ const multiuserShare = async (req, res, next) => {
       { userName: { $in: usersNotSharedWith } },
       { $pullAll: { userOpenedToImages: imagesIdList } }
     );
+
     res.status(200).json({
       message: "Sharing successful.",
     });
   } catch (error) {
-    console.log(error);
+    console.log(
+      "Error while performing multiple users images sharing. ",
+      error
+    );
     error.message =
       "Error while performing multiple users images sharing. " + error.message;
     next(error);
