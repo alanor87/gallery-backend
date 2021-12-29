@@ -4,6 +4,8 @@ const app = express();
 const api = require("./api");
 const morgan = require("morgan");
 const { tokenValidation } = require("./middleware");
+const swaggerUI = require("swagger-ui-express");
+const swaggerDocument = require("./specs/swagger.json");
 
 app.use(morgan("tiny"));
 app.use(cors());
@@ -14,6 +16,7 @@ app.use("/api/v1/users", tokenValidation, api.users);
 app.use("/api/v1/images", tokenValidation, api.images);
 app.use("/api/v1/public", api.public);
 app.use("/api/v1/interface", api.interface);
+app.use("/api/v1/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 app.use((_, res) => {
   res.status(404).json({
