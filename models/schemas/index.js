@@ -1,10 +1,10 @@
-const publicSettingSchema = require("./publicsSetting");
+const publicSettingsSchema = require("./publicsSettings");
 const imageSchema = require("./image");
 const userSchema = require("./user");
 const interfaceSchema = require("./interface");
 
 module.exports = {
-  publicSettingSchema,
+  publicSettingsSchema,
   imageSchema,
   userSchema,
   interfaceSchema,

@@ -19,6 +19,7 @@ const updateImages = async (req, res, next) => {
       body: { updatedImages },
     });
   } catch (error) {
+    console.log(error);
     error.message = `Error while updating images, ${error.message}`;
     next(error);
   }

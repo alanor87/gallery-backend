@@ -1,14 +1,21 @@
-const { PublicSetting } = require("../../models");
+const { PublicSettings } = require("../../models");
 
 async function getPublicImages(req, res, next) {
   try {
-    const publicSettings = await PublicSetting.findOne({});
-    await publicSettings.populate("publicImagesList", "-imageHostingId");
-    console.log(publicSettings.publicImagesList);
+    const { currentPage, imagesPerPage } = req.query;
+    const offset = currentPage * imagesPerPage;
+    const { publicImagesList } = await PublicSettings.findOne({})
+      .select("publicImagesList")
+      .populate({
+        path: "publicImagesList",
+        skip: offset,
+        limit: imagesPerPage,
+        select: "-imageHostingId",
+      });
     res.status(200).json({
       message: "Success getting public images.",
       code: 200,
-      body: { publicImages: publicSettings.publicImagesList },
+      body: { images: publicImagesList },
     });
   } catch (error) {
     next(error);

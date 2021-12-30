@@ -10,7 +10,7 @@ const login = async (req, res, next) => {
       !requestedUser.comparePassword(req.body.userPassword)
     ) {
       res.status(403).json({
-        status: "Forbidden",
+        status: "Forbidden.",
         code: 403,
         message: "Invalid email or password.",
       });
@@ -26,8 +26,8 @@ const login = async (req, res, next) => {
     const { userPassword, ...userDataToSend } = userWithToken.toObject(); // analog of getSnapshot in MST))
 
     res.status(201).json({
-      status: "Logged in",
-      code: 201,
+      status: "Success.",
+      code: 200,
       message: "User is logged in.",
       body: userDataToSend,
     });

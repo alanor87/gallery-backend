@@ -1,4 +1,4 @@
-const { PublicSetting } = require("../models");
+const { PublicSettings } = require("../models");
 
 async function updatePublicImagesList(imagesToUpdate) {
   try {
@@ -13,12 +13,12 @@ async function updatePublicImagesList(imagesToUpdate) {
       }
     });
 
-    await PublicSetting.findOneAndUpdate(
+    await PublicSettings.findOneAndUpdate(
       {},
       { $pullAll: { publicImagesList: imagesToRemove } }
     );
 
-    await PublicSetting.findOneAndUpdate(
+    await PublicSettings.findOneAndUpdate(
       {},
       { $addToSet: { publicImagesList: { $each: imagesToAdd } } }
     );

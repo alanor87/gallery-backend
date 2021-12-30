@@ -8,7 +8,7 @@ router.post(
   images.uploadImages
 );
 router.get("/userOwnedImages", images.getUserOwnedImages);
-router.get("/openedToImages", images.getUserOpenedToImages);
+router.get("/userOpenedToImages", images.getUserOpenedToImages);
 router.get("/:id", images.getOne);
 router.put("/updateImages", images.updateImages);
 router.post("/multiuserShare", images.multiuserShare);

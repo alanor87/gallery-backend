@@ -1,10 +1,10 @@
-const PublicSetting = require("./publicSetting");
+const PublicSettings = require("./publicSettings");
 const Image = require("./image");
 const Interface = require("./interface");
 const User = require("./user");
 
 module.exports = {
-  PublicSetting,
+  PublicSettings,
   Image,
   Interface,
   User,

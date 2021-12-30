@@ -1,6 +1,6 @@
 const { Schema } = require("mongoose");
 
-const publicSetting = Schema(
+const publicSettings = Schema(
   {
     publicImagesList: [
       {
@@ -12,4 +12,4 @@ const publicSetting = Schema(
   { collection: "publicSettings" }
 );
 
-module.exports = publicSetting;
+module.exports = publicSettings;
