@@ -10,7 +10,6 @@ const getUserOwnedImages = async (req, res, next) => {
         path: "userOwnedImages",
         options: { skip: offset, limit: imagesPerPage },
       });
-    // .populate({ path: "userOwnedImages", options: {} });
     res.status(200).json({
       message: "Success",
       code: 200,

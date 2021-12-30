@@ -8,10 +8,11 @@ async function getPublicImages(req, res, next) {
       .select("publicImagesList")
       .populate({
         path: "publicImagesList",
-        skip: offset,
+        // skip: offset,
         limit: imagesPerPage,
         select: "-imageHostingId",
       });
+    console.log(offset, publicImagesList);
     res.status(200).json({
       message: "Success getting public images.",
       code: 200,
