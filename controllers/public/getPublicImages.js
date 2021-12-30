@@ -8,7 +8,7 @@ async function getPublicImages(req, res, next) {
       .select("publicImagesList")
       .populate({
         path: "publicImagesList",
-        // skip: offset,
+        skip: offset,
         limit: imagesPerPage,
         select: "-imageHostingId",
       });
