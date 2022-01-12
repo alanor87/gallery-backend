@@ -7,7 +7,6 @@ const uploadImages = async (req, res, next) => {
     const newImages = [];
     const newImagesIds = [];
     for (let i = 0; i < req.files.length; i += 1) {
-      console.log(`Image path number ${i} : ${req.files[i].path}`);
       const singleImageUploadResponse = await cloudinary.uploader.upload(
         req.files[i].path
       );
@@ -38,7 +37,7 @@ const uploadImages = async (req, res, next) => {
       newImages,
     });
   } catch (error) {
-    console.log((error.message += "Error while creating image."));
+    console.log((error.message + "Error while creating image."));
     error.message += "Error while creating image.";
     next(error);
   }

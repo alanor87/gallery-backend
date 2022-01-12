@@ -1,4 +1,4 @@
-const { Image, User } = require("../../models");
+const { Image, User, PublicSettings } = require("../../models");
 const { cloudinary } = require("../../utils");
 
 const deleteImages = async (req, res, next) => {
@@ -34,6 +34,14 @@ const deleteImages = async (req, res, next) => {
       { _id: req.userId },
       { $pullAll: { userOwnedImages: deleteIdList } },
       { new: true }
+    );
+
+    /*
+     * Deleting images IDs from the list of public gallery images.
+     */
+    await PublicSettings.findOneAndUpdate(
+      {},
+      { $pullAll: { publicImagesList: deleteIdList } }
     );
 
     res.status(200).json({

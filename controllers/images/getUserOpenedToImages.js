@@ -30,9 +30,9 @@ const getUserOpenedToImages = async (req, res) => {
       }
       case false: {
         const { userOpenedToImages } = await getUser({ _id: req.userId })
-          .select("userOwnedImages")
+          .select("userOpenedToImages")
           .populate({
-            path: "userOwnedImages",
+            path: "userOpenedToImages",
             options: { skip: offset, limit: imagesPerPage },
             select: "-imageHostingId",
           });
