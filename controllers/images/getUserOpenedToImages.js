@@ -11,10 +11,10 @@ const getUserOpenedToImages = async (req, res) => {
           .populate({
             path: "userOpenedToImages",
             match: { "imageInfo.tags": filter },
-            select: "-imageHostingId",
+            select: "-imageHostingId -smallImageHostingId",
           });
 
-        const filteresImagesWithPagination = userOpenedToImages.slice(
+        const filteredImagesWithPagination = userOpenedToImages.slice(
           offset,
           offset + imagesPerPage
         );
@@ -22,7 +22,7 @@ const getUserOpenedToImages = async (req, res) => {
           message: "Success",
           code: 200,
           body: {
-            images: filteresImagesWithPagination || [],
+            images: filteredImagesWithPagination || [],
             filteredImagesNumber: userOpenedToImages.length,
           },
         });
@@ -34,7 +34,7 @@ const getUserOpenedToImages = async (req, res) => {
           .populate({
             path: "userOpenedToImages",
             options: { skip: offset, limit: imagesPerPage },
-            select: "-imageHostingId",
+            select: "-imageHostingId -smallImageHostingId",
           });
         res.status(200).json({
           message: "Success",

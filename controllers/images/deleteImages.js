@@ -5,9 +5,16 @@ const deleteImages = async (req, res, next) => {
   try {
     const { imagesToDelete } = req.body;
     const deleteIdList = imagesToDelete.map((image) => image.selectedId);
-    const deleteHostingIdList = imagesToDelete.map(
-      (image) => image.imageHostingId
+    const hostingIdList = await Image.find(
+      { _id: { $in: deleteIdList } },
+      "-_id imageHostingId smallImageHostingId"
     );
+
+    const imagesHostingIdList = [];
+    hostingIdList.forEach(({ imageHostingId, smallImageHostingId }) => {
+      imagesHostingIdList.push(imageHostingId);
+      imagesHostingIdList.push(smallImageHostingId);
+    });
 
     /*
      * Deleting images from DB.
@@ -17,7 +24,7 @@ const deleteImages = async (req, res, next) => {
     /*
      * Deleting images from hosting.
      */
-    await cloudinary.api.delete_resources(deleteHostingIdList);
+    await cloudinary.api.delete_resources(imagesHostingIdList);
 
     /*
      * Deleting images IDs from userOpenedToImages in User object for all users.

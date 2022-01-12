@@ -11,9 +11,10 @@ const getUserOwnedImages = async (req, res, next) => {
           .populate({
             path: "userOwnedImages",
             match: { "imageInfo.tags": filter },
+            select: "-imageHostingId -smallImageHostingId",
           });
 
-        const filteresImagesWithPagination = userOwnedImages.slice(
+        const filteredImagesWithPagination = userOwnedImages.slice(
           offset,
           offset + imagesPerPage
         );
@@ -21,7 +22,7 @@ const getUserOwnedImages = async (req, res, next) => {
           message: "Success",
           code: 200,
           body: {
-            images: filteresImagesWithPagination || [],
+            images: filteredImagesWithPagination || [],
             filteredImagesNumber: userOwnedImages.length,
           },
         });
@@ -33,6 +34,7 @@ const getUserOwnedImages = async (req, res, next) => {
           .populate({
             path: "userOwnedImages",
             options: { skip: offset, limit: imagesPerPage },
+            select: "-imageHostingId -smallImageHostingId",
           });
         res.status(200).json({
           message: "Success",
