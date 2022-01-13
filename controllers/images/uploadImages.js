@@ -12,7 +12,6 @@ const uploadImages = async (req, res, next) => {
       const imageBuffer = fs.readFileSync(req.files[i].path);
       const imageBuffer_small = await resizeImg(imageBuffer, {
         width: 370,
-        height: 200,
         format: "jpg",
       });
 
