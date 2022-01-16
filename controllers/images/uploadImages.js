@@ -12,7 +12,6 @@ const uploadImages = async (req, res, next) => {
       const imageBuffer = fs.readFileSync(req.files[i].path);
       const imageBuffer_small = await resizeImg(imageBuffer, {
         width: 370,
-        height: 200,
         format: "jpg",
       });
 
@@ -59,6 +58,7 @@ const uploadImages = async (req, res, next) => {
       newImages,
     });
   } catch (error) {
+    console.log(error);
     console.log(error.message + "Error while creating image.");
     error.message += "Error while creating image.";
     next(error);
