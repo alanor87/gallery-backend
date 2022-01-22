@@ -11,7 +11,8 @@ async function getPublicImages(req, res, next) {
           .populate({
             path: "publicImagesList",
             match: { "imageInfo.tags": filter },
-            select: "-imageHostingId -smallImageHostingId",
+            select:
+              "-imageHostingId -smallImageHostingId -imageInfo.openedTo -imageInfo.belongsTo",
           });
 
         const filteredImagesWithPagination = publicImagesList.slice(
@@ -34,7 +35,8 @@ async function getPublicImages(req, res, next) {
           .populate({
             path: "publicImagesList",
             options: { skip: offset, limit: imagesPerPage },
-            select: "-imageHostingId -smallImageHostingId",
+            select:
+              "-imageHostingId -smallImageHostingId -imageInfo.openedTo -imageInfo.belongsTo",
           });
         res.status(200).json({
           message: "Success",

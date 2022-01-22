@@ -1,6 +1,9 @@
 const { public } = require("../controllers");
+const { images } = require("../controllers");
+const { isImagePublic } = require("../middleware");
 const router = require("express").Router();
 
+router.get("/publicImages/:id", isImagePublic, images.getOne);
 router.get("/publicImages", public.getPublicImages);
 router.get("/publicSettings", public.getPublicSettings);
 
