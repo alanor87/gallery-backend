@@ -12,6 +12,7 @@ async function isImagePublic(req, res, next) {
       (id) => id.toString() === req.params.id
     );
     if (imageIsPublic) {
+      req.isPublicRequest = true;
       next();
     } else {
       const error = new Error("Image is not in public access");
