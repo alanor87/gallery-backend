@@ -11,6 +11,14 @@ app.use(morgan("tiny"));
 app.use(cors());
 app.use(express.json());
 
+app.set("views", "./templates");
+app.set("view engine", "pug");
+
+app.get("/static", function (req, res) {
+  console.log("");
+  res.render("index", { title: "Hey", message: "Hello there!" });
+});
+
 app.use("/api/v1/auth", api.auth);
 app.use("/api/v1/users", tokenValidation, api.users);
 app.use("/api/v1/images", tokenValidation, api.images);
