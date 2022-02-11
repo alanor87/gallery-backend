@@ -8,6 +8,7 @@ const uploadImages = async (req, res, next) => {
     const { userId } = req;
     const newImages = [];
     const newImagesIds = [];
+
     for (let i = 0; i < req.files.length; i += 1) {
       const imageBuffer = fs.readFileSync(req.files[i].path);
       const imageBuffer_small = await resizeImg(imageBuffer, {
@@ -31,17 +32,19 @@ const uploadImages = async (req, res, next) => {
         singleImageUploadResponse;
       const { secure_url: smallImageURL, public_id: smallImageHostingId } =
         singleSmallImageUploadResponse;
+
       const newImage = await Image.create({
         imageURL,
+        imageHostingId,
         smallImageURL,
         smallImageHostingId,
-        imageHostingId,
         imageInfo: {
           belongsTo: userId,
           tags: [],
           likes: [],
         },
       });
+
       newImages.push(newImage);
       newImagesIds.push(newImage._id);
     }

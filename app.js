@@ -8,7 +8,7 @@ const swaggerUI = require("swagger-ui-express");
 const swaggerDocument = require("./specs/swagger.json");
 
 app.use(morgan("tiny"));
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 
 app.set("views", "./templates");
