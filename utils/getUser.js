@@ -1,7 +1,7 @@
 const { User } = require("../models");
 
 /*
- * Returning user instance either as it is.
+ * Returning user instance as it is.
  */
 
 const getUser = (filter) => {

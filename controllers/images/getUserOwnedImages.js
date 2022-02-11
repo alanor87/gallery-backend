@@ -1,4 +1,4 @@
-const { getUser } = require("../../utils");
+const { getUser, omitedImageFields } = require("../../utils");
 
 const getUserOwnedImages = async (req, res, next) => {
   try {
@@ -11,7 +11,7 @@ const getUserOwnedImages = async (req, res, next) => {
           .populate({
             path: "userOwnedImages",
             match: { "imageInfo.tags": filter },
-            select: "-imageHostingId -smallImageHostingId",
+            select: omitedImageFields.userOwner,
           });
 
         const filteredImagesWithPagination = userOwnedImages.slice(
@@ -34,7 +34,7 @@ const getUserOwnedImages = async (req, res, next) => {
           .populate({
             path: "userOwnedImages",
             options: { skip: offset, limit: imagesPerPage },
-            select: "-imageHostingId -smallImageHostingId",
+            select: omitedImageFields.userOwner,
           });
         res.status(200).json({
           message: "Success",

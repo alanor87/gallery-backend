@@ -1,11 +1,20 @@
 const { Image } = require("../../models");
+const { omitedImageFields, isImageOwner } = require("../../utils");
 
 const getOne = async (req, res, next) => {
   const imageIdToGet = req.params.id;
   try {
-    const fieldsToExclude = req.isPublicRequest
-      ? "-imageHostingId -smallImageHostingId -imageInfo.openedTo -imageInfo.belongsTo"
-      : "-imageHostingId -smallImageHostingId";
+    // isPublicRequest flag is true whenever the request comes from public gallery page -
+    // and the requested image is present in the publicImages list.
+    let fieldsToExclude;
+    if (req.isPublicRequest) {
+      fieldsToExclude = omitedImageFields.userPublic;
+    } else {
+      fieldsToExclude = (await isImageOwner(req.userId, imageIdToGet))
+        ? omitedImageFields.userOwner
+        : omitedImageFields.userSharedWith;
+    }
+
     const image = await Image.findById(imageIdToGet).select(fieldsToExclude);
     if (!image)
       res.status(404).json({

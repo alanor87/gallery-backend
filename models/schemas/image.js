@@ -37,6 +37,10 @@ const imageSchema = Schema(
         type: [String],
         default: [],
       },
+      sharedByLink: {
+        type: Boolean,
+        default: false,
+      },
     },
   },
   { versionKey: false, timeStamps: true }
