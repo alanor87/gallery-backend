@@ -1,5 +1,10 @@
 const { Image } = require("../../models");
 
+const siteUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://focused-carson-2ae3a4.netlify.app/gallery"
+    : "http://localhost:3000";
+
 async function getStandaloneImageView(req, res) {
   try {
     const image = await Image.findById(req.params.id);
@@ -8,6 +13,7 @@ async function getStandaloneImageView(req, res) {
         title: "Image!",
         message: "It works!",
         src: image.imageURL,
+        siteUrl,
       });
     } else {
       res.status(403).json({

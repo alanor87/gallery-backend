@@ -2,12 +2,24 @@ doctype html
 html
   head
     title= title
-    <style>  
-      | body { background-color: black; display: flex;}
-      | img {max-width: 100%; height: auto;}
-    </style>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1" />       
+    style
+     include stadaloneStyles.css
   body
-  div.main
-    h1= message
-    img(src= src, alt="")
+  .main
+    .imagePart 
+       img(src= src, alt="")
+    .nonImagePart 
+     .imageHeader
+       h1= message
+     div.description
+      p.
+        Desscription of the image. Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum accusamus hic distinctio nesciunt temporibus accusantium aliquam quisquam eligendi eveniet enim facilis nisi ad officiis qui, iusto blanditiis labore exercitationem. Voluptatem consectetur molestiae nemo debitis maiores ab tenetur, natus excepturi. Maiores ex hic assumenda molestias rem minima laborum labore natus animi eum. Explicabo ipsam temporibus molestias assumenda numquam officiis sint amet placeat. Eos minus aliquam ratione illo dicta, distinctio a adipisci, rerum hic ex pariatur corrupti odit sit nesciunt accusamus! Minus sunt error sint? Est veritatis possimus nobis placeat. Vel nostrum facilis soluta adipisci explicabo ratione aliquam mollitia reprehenderit delectus neque.
+      p.
+        Desscription of the image. Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum accusamus hic distinctio nesciunt temporibus accusantium aliquam quisquam eligendi eveniet enim facilis nisi ad officiis qui, iusto blanditiis labore exercitationem. Voluptatem consectetur molestiae nemo debitis maiores ab tenetur, natus excepturi. Maiores ex hic assumenda molestias rem minima laborum labore natus animi eum. Explicabo ipsam temporibus molestias assumenda numquam officiis sint amet placeat. Eos minus aliquam ratione illo dicta, distinctio a adipisci, rerum hic ex pariatur corrupti odit sit nesciunt accusamus! Minus sunt error sint? Est veritatis possimus nobis placeat. Vel nostrum facilis soluta adipisci explicabo ratione aliquam mollitia reprehenderit delectus neque.
+      p.
+        Desscription of the image. Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum accusamus hic distinctio nesciunt temporibus accusantium aliquam quisquam eligendi eveniet enim facilis nisi ad officiis qui, iusto blanditiis labore exercitationem. Voluptatem consectetur molestiae nemo debitis maiores ab tenetur, natus excepturi. Maiores ex hic assumenda molestias rem minima laborum labore natus animi eum. Explicabo ipsam temporibus molestias assumenda numquam officiis sint amet placeat. Eos minus aliquam ratione illo dicta, distinctio a adipisci, rerum hic ex pariatur corrupti odit sit nesciunt accusamus! Minus sunt error sint? Est veritatis possimus nobis placeat. Vel nostrum facilis soluta adipisci explicabo ratione aliquam mollitia reprehenderit delectus neque.
+      p.
+        Description of the image. Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum accusamus hic distinctio nesciunt temporibus accusantium aliquam quisquam eligendi eveniet enim facilis nisi ad officiis qui, iusto blanditiis labore exercitationem. Voluptatem consectetur molestiae nemo debitis maiores ab tenetur, natus excepturi. Maiores ex hic assumenda molestias rem minima laborum labore natus animi eum. Explicabo ipsam temporibus molestias assumenda numquam officiis sint amet placeat. Eos minus aliquam ratione illo dicta, distinctio a adipisci, rerum hic ex pariatur corrupti odit sit nesciunt accusamus! Minus sunt error sint? Est veritatis possimus nobis placeat. Vel nostrum facilis soluta adipisci explicabo ratione aliquam mollitia reprehenderit delectus neque.
+     .descriptionFooter
+      a(href=siteUrl)=siteUrl

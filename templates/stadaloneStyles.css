@@ -1,0 +1,105 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: var(--main-text-color) var(--main-background-color);
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--main-background-color);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-border-main);
+  border-radius: 2px;
+}
+
+body {
+  background-color: rgb(22, 22, 22);
+  color: rgba(218, 207, 207, 0.952);
+  font: 16px, "Piazzolla", serif;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+}
+
+.imagePart {
+  position: relative;
+  width: 75%;
+  height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: scroll;
+}
+.imagePart img {
+  width: 100%;
+  height: auto;
+}
+
+.nonImagePart {
+  position: relative;
+  width: 25%;
+  height: 100vh;
+  overflow-y: auto;
+}
+.imageHeader {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  background-color: rgba(22, 22, 22, 0.8);
+}
+.description {
+  padding: 0 11px;
+}
+.description p {
+  text-indent: 10px;
+}
+.description p::first-letter {
+  font-size: 19px;
+}
+.descriptionFooter {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  background-color: rgba(22, 22, 22, 0.8);
+}
+
+a {
+  color: rgb(240, 117, 35);
+  text-decoration: none;
+}
+
+@media screen and (max-width: 900px) {
+  .main {
+    display: block;
+    height: 100vh;
+    overflow: auto;
+  }
+  .imagePart {
+    width: auto;
+    height: auto;
+    overflow-y: auto;
+  }
+  .imagePart img {
+    width: 100%;
+    height: auto;
+    min-height: 200px;
+  }
+  .nonImagePart {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow-y: unset;
+  }
+}
