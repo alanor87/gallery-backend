@@ -16,16 +16,14 @@ async function getStandaloneImageView(req, res) {
         siteUrl,
       });
     } else {
-      res.status(403).json({
-        code: 403,
-        status: "Invalid link.",
+      res.render("standaloneImageError", {
+        title: "Error",
         message: "The image is not accessible through standalone view.",
       });
     }
   } catch (error) {
-    res.status(403).json({
-      code: 403,
-      status: "Invalid link.",
+    res.render("standaloneImageError", {
+      title: "Error",
       message:
         "The image ID is invalid or not accessible through standalone view.",
     });
