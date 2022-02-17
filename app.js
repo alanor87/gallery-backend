@@ -1,21 +1,26 @@
 const express = require("express");
+require("dotenv").config();
 const cors = require("cors");
 const app = express();
 const api = require("./api");
 const morgan = require("morgan");
-const path = require("path");
 const { tokenValidation } = require("./middleware");
 const swaggerUI = require("swagger-ui-express");
 const swaggerDocument = require("./specs/swagger.json");
 
+console.log(process.env.NODE_ENV);
+
+const allowedCorsOrigin =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:3000"
+    : "https://focused-carson-2ae3a4.netlify.app/";
+
 app.use(morgan("tiny"));
-app.use(cors());
+app.use(cors({ origin: allowedCorsOrigin }));
 app.use(express.json());
 
 app.set("views", "./templates");
 app.set("view engine", "pug");
-
-app.use(express.static(path.join(__dirname, "frontend")));
 
 app.use("/api/v1/auth", api.auth);
 app.use("/api/v1/users", tokenValidation, api.users);
