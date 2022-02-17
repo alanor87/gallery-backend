@@ -13,7 +13,7 @@ console.log(process.env.NODE_ENV);
 const allowedCorsOrigin =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000"
-    : "https://focused-carson-2ae3a4.netlify.app/";
+    : "https://focused-carson-2ae3a4.netlify.app";
 
 app.use(morgan("tiny"));
 app.use(cors({ origin: allowedCorsOrigin }));
