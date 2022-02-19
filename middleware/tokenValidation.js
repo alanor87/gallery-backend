@@ -31,9 +31,11 @@ const tokenValidation = async (req, res, next) => {
     req.userId = _id;
     next();
   } catch (error) {
-    res
-      .status(401)
-      .send(`Token validation error. Token might be invalid expired.`);
+    res.status(401).json({
+      status: "Unauthorized.",
+      code: 403,
+      message: "Token is invalid or expired.",
+    });
   }
 };
 
