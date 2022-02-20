@@ -14,6 +14,12 @@ const getUserOwnedImages = async (req, res, next) => {
             select: omitedImageFields.userOwner,
           });
 
+        const allFilteredImagesId = userOwnedImages.map((image) =>
+          image._id.toString()
+        );
+
+        console.log(allFilteredImagesId);
+
         const filteredImagesWithPagination = userOwnedImages.slice(
           offset,
           offset + imagesPerPage
@@ -23,7 +29,7 @@ const getUserOwnedImages = async (req, res, next) => {
           code: 200,
           body: {
             images: filteredImagesWithPagination || [],
-            filteredImagesNumber: userOwnedImages.length,
+            allFilteredImagesId,
           },
         });
         break;

@@ -8,7 +8,7 @@ const omitedImageFields = {
   userSharedWith:
     "-imageHostingId -smallImageHostingId -imageInfo.openedTo -imageInfo.sharedByLink",
   userPublic:
-    "-imageHostingId -smallImageHostingId -imageInfo.openedTo -imageInfo.belongsTo -imageInfo.sharedByLink -imageInfo.isPublic",
+    "-imageHostingId -smallImageHostingId -imageInfo.openedTo -imageInfo.belongsTo -imageInfo.sharedByLink",
 };
 
 module.exports = omitedImageFields;

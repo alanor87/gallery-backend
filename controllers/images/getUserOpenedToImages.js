@@ -15,6 +15,10 @@ const getUserOpenedToImages = async (req, res) => {
             select: omitedImageFields.userSharedWith,
           });
 
+        const allFilteredImagesId = userOpenedToImages.map((image) =>
+          image._id.toString()
+        );
+
         const filteredImagesWithPagination = userOpenedToImages.slice(
           offset,
           offset + imagesPerPage
@@ -24,13 +28,13 @@ const getUserOpenedToImages = async (req, res) => {
           code: 200,
           body: {
             images: filteredImagesWithPagination || [],
-            filteredImagesNumber: userOpenedToImages.length,
+            allFilteredImagesId,
           },
         });
         break;
       }
       case false: {
-        // if filter data is present.
+        // if no filter data is present.
         const { userOpenedToImages } = await getUser({ _id: req.userId })
           .select("userOpenedToImages")
           .populate({

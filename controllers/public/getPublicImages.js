@@ -16,6 +16,10 @@ async function getPublicImages(req, res, next) {
             select: omitedImageFields.userPublic,
           });
 
+        const allFilteredImagesId = publicImagesList.map((image) =>
+          image._id.toString()
+        );
+
         const filteredImagesWithPagination = publicImagesList.slice(
           offset,
           offset + imagesPerPage
@@ -26,12 +30,12 @@ async function getPublicImages(req, res, next) {
           code: 200,
           body: {
             images: filteredImagesWithPagination || [],
-            filteredImagesNumber: publicImagesList.length,
+            allFilteredImagesId,
           },
         });
         break;
       }
-      // if filter data is absent.
+      // if no filter data is absent.
       case false: {
         const { publicImagesList } = await PublicSettings.findOne({})
           .select("publicImagesList")
