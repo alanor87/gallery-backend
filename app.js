@@ -16,7 +16,7 @@ const allowedCorsOrigin =
     : "https://focused-carson-2ae3a4.netlify.app";
 
 app.use(morgan("tiny"));
-app.use(cors({ origin: allowedCorsOrigin }));
+app.use(cors());
 app.use(express.json());
 
 app.set("views", "./templates");
