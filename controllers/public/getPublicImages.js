@@ -2,9 +2,12 @@ const { PublicSettings } = require("../../models");
 const { omitedImageFields } = require("../../utils");
 
 async function getPublicImages(req, res, next) {
+  const { filter } = req.query;
+  const currentPage = Number(req.query.currentPage);
+  const imagesPerPage = Number(req.query.imagesPerPage);
+
+  const offset = currentPage * imagesPerPage;
   try {
-    const { currentPage, imagesPerPage, filter } = req.query;
-    const offset = currentPage * imagesPerPage;
     switch (Boolean(filter)) {
       // if filter data is present.
       case true: {
@@ -35,20 +38,25 @@ async function getPublicImages(req, res, next) {
         });
         break;
       }
-      // if no filter data is absent.
+      // if filter data is absent.
       case false: {
         const { publicImagesList } = await PublicSettings.findOne({})
           .select("publicImagesList")
           .populate({
             path: "publicImagesList",
-            options: { skip: offset, limit: imagesPerPage },
             select: omitedImageFields.userPublic,
           });
+
+        const imagesWithPagination = publicImagesList.slice(
+          offset,
+          offset + imagesPerPage
+        );
+
         res.status(200).json({
           message: "Success",
           code: 200,
           body: {
-            images: publicImagesList || [],
+            images: imagesWithPagination || [],
             filteredImagesNumber: 0,
           },
         });
@@ -56,6 +64,7 @@ async function getPublicImages(req, res, next) {
       }
     }
   } catch (error) {
+    console.log("error", error.message);
     next(error);
   }
 }

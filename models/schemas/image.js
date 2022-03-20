@@ -16,6 +16,14 @@ const imageSchema = Schema(
       type: String,
     },
     imageInfo: {
+      title: {
+        type: String,
+        default: "",
+      },
+      description: {
+        type: String,
+        default: "",
+      },
       tags: {
         type: [String],
         default: [],

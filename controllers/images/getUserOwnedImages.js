@@ -2,9 +2,12 @@ const { getUser, omitedImageFields } = require("../../utils");
 
 const getUserOwnedImages = async (req, res, next) => {
   try {
-    const { currentPage, imagesPerPage, filter } = req.query;
+    const { filter } = req.query;
+    const currentPage = Number(req.query.currentPage);
+    const imagesPerPage = Number(req.query.imagesPerPage);
     const offset = currentPage * imagesPerPage;
     switch (Boolean(filter)) {
+      // if filter data is present.
       case true: {
         const { userOwnedImages } = await getUser({ _id: req.userId })
           .select("userOwnedImages")
@@ -17,8 +20,6 @@ const getUserOwnedImages = async (req, res, next) => {
         const allFilteredImagesId = userOwnedImages.map((image) =>
           image._id.toString()
         );
-
-        console.log(allFilteredImagesId);
 
         const filteredImagesWithPagination = userOwnedImages.slice(
           offset,
@@ -34,19 +35,25 @@ const getUserOwnedImages = async (req, res, next) => {
         });
         break;
       }
+      // if no filter data is present.
       case false: {
         const { userOwnedImages } = await getUser({ _id: req.userId })
           .select("userOwnedImages")
           .populate({
             path: "userOwnedImages",
-            options: { skip: offset, limit: imagesPerPage },
             select: omitedImageFields.userOwner,
           });
+
+        const imagesWithPagination = userOwnedImages.slice(
+          offset,
+          offset + imagesPerPage
+        );
+
         res.status(200).json({
           message: "Success",
           code: 200,
           body: {
-            images: userOwnedImages || [],
+            images: imagesWithPagination || [],
             filteredImagesNumber: 0,
           },
         });

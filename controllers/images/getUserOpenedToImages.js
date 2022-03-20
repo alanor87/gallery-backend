@@ -2,7 +2,9 @@ const { getUser, omitedImageFields } = require("../../utils");
 
 const getUserOpenedToImages = async (req, res) => {
   try {
-    const { currentPage, imagesPerPage, filter } = req.query;
+    const { filter } = req.query;
+    const currentPage = Number(req.query.currentPage);
+    const imagesPerPage = Number(req.query.imagesPerPage);
     const offset = currentPage * imagesPerPage;
     switch (Boolean(filter)) {
       // if filter data is present.
@@ -39,14 +41,19 @@ const getUserOpenedToImages = async (req, res) => {
           .select("userOpenedToImages")
           .populate({
             path: "userOpenedToImages",
-            options: { skip: offset, limit: imagesPerPage },
             select: omitedImageFields.userSharedWith,
           });
+
+        const imagesWithPagination = userOpenedToImages.slice(
+          offset,
+          offset + imagesPerPage
+        );
+
         res.status(200).json({
           message: "Success",
           code: 200,
           body: {
-            images: userOpenedToImages || [],
+            images: imagesWithPagination || [],
             filteredImagesNumber: 0,
           },
         });
