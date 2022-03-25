@@ -10,8 +10,9 @@ async function getStandaloneImageView(req, res) {
     const image = await Image.findById(req.params.id);
     if (image.imageInfo.sharedByLink) {
       res.render("standaloneImage", {
-        title: "Image!",
-        message: "It works!",
+        title: image.imageInfo.title,
+        message: image.imageInfo.title,
+        description: image.imageInfo.description,
         src: image.imageURL,
         siteUrl,
       });
