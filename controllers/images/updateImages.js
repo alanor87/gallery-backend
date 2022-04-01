@@ -6,7 +6,21 @@ const updateImages = async (req, res, next) => {
     const { imagesToUpdate } = req.body;
 
     const imagesUpdateRequests = imagesToUpdate.map(({ _id, imageInfo }) => {
-      return Image.findByIdAndUpdate(_id, { imageInfo }, { new: true });
+      console.log("incoming image info : ", imageInfo);
+      const infoUpdateObjectQuery = {};
+
+      for (const key in imageInfo) {
+        infoUpdateObjectQuery["imageInfo." + key] = imageInfo[key];
+      }
+      console.log(
+        "query object with updating fields : ",
+        infoUpdateObjectQuery
+      );
+      return Image.findByIdAndUpdate(
+        _id,
+        { $set: infoUpdateObjectQuery },
+        { new: true }
+      );
     });
 
     const updatedImages = await Promise.all(imagesUpdateRequests);
