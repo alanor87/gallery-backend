@@ -4,11 +4,11 @@
  select: operator in options object of mongoose populate() model method. */
 
 const omitedImageFields = {
-  userOwner: "-imageHostingId -smallImageHostingId",
+  userOwner: "-imageHostingId -smallImageHostingId -width -height",
   userSharedWith:
-    "-imageHostingId -smallImageHostingId -imageInfo.openedTo -imageInfo.sharedByLink",
+    "-imageHostingId -smallImageHostingId -imageInfo.openedTo -imageInfo.sharedByLink -width -height",
   userPublic:
-    "-imageHostingId -smallImageHostingId -imageInfo.openedTo -imageInfo.belongsTo -imageInfo.sharedByLink",
+    "-imageHostingId -smallImageHostingId -imageInfo.openedTo -imageInfo.belongsTo -imageInfo.sharedByLink -width -height",
 };
 
 module.exports = omitedImageFields;

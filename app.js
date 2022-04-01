@@ -17,6 +17,7 @@ const allowedCorsOrigin =
 
 app.use(morgan("tiny"));
 app.use(cors());
+app.use("/static", express.static("static"));
 app.use(express.json());
 
 app.set("views", "./templates");

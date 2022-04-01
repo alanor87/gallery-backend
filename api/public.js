@@ -6,6 +6,7 @@ const router = require("express").Router();
 router.get("/publicImages/:id", isImagePublic, images.getOne);
 router.get("/standaloneShare/:id", public.getStandaloneImageView);
 router.get("/publicImages", public.getPublicImages);
+router.get("/getBackgroundImage", public.getBackgroundImage);
 router.get("/publicSettings", public.getPublicSettings);
 
 module.exports = router;

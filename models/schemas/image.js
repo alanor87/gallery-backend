@@ -15,6 +15,14 @@ const imageSchema = Schema(
     smallImageHostingId: {
       type: String,
     },
+    width: {
+      type: Number,
+      default: 0,
+    },
+    height: {
+      type: Number,
+      default: 0,
+    },
     imageInfo: {
       title: {
         type: String,
