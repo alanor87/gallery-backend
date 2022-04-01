@@ -16,7 +16,7 @@ async function getBackgroundImage(req, res, next) {
 
     if (!largeImagesUrls.length) {
       backgroundImageUrl =
-        "http://" + req.headers.host + "/static/default_background.jpg";
+        "https://" + req.headers.host + "/static/default_background.jpg";
     } else {
       const randomUrlIndex = Math.ceil(
         Math.random() * largeImagesUrls.length - 1
