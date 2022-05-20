@@ -49,3 +49,5 @@ app.use((error, _, res, __) => {
 });
 
 module.exports = app;
+
+const ggg = [];
