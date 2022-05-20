@@ -47,7 +47,7 @@ async function getPublicImages(req, res, next) {
             select: omitedImageFields.userPublic,
           });
 
-          console.log(publicImagesList.map(image => image._id.toString()))
+        console.log(publicImagesList.map((image) => image._id.toString()));
 
         const imagesWithPagination = publicImagesList.slice(
           offset,
@@ -70,5 +70,5 @@ async function getPublicImages(req, res, next) {
     next(error);
   }
 }
-
+const dfd = () => {};
 module.exports = getPublicImages;
