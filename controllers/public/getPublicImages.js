@@ -47,6 +47,8 @@ async function getPublicImages(req, res, next) {
             select: omitedImageFields.userPublic,
           });
 
+          console.log(publicImagesList.map(image => image._id.toString()))
+
         const imagesWithPagination = publicImagesList.slice(
           offset,
           offset + imagesPerPage

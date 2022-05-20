@@ -1,5 +1,24 @@
 const { Schema } = require("mongoose");
 
+const descriptionAnchor = Schema({
+  anchorText: {
+    type: String,
+    default: "",
+  },
+  anchorTextStartPos: {
+    type: Number,
+    default: 0,
+  },
+});
+
+const imageDescription = Schema({
+  text: {
+    type: String,
+    default: "",
+  },
+  anchors: [descriptionAnchor],
+});
+
 const imageSchema = Schema(
   {
     imageURL: {
@@ -28,10 +47,7 @@ const imageSchema = Schema(
         type: String,
         default: "",
       },
-      description: {
-        type: String,
-        default: "",
-      },
+      description: imageDescription,
       tags: {
         type: [String],
         default: [],
