@@ -9,6 +9,14 @@ const descriptionAnchor = Schema({
     type: Number,
     default: 0,
   },
+  anchorFrameCoords: {
+    type: [Number],
+    default: [0, 0],
+  },
+  anchorFrameSize: {
+    type: [Number],
+    default: [0, 0],
+  },
 });
 
 const imageDescription = Schema({
