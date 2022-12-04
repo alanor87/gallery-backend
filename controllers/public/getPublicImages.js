@@ -60,7 +60,7 @@ async function getPublicImages(req, res, next) {
           body: {
             images: imagesWithPagination || [],
             filteredImagesNumber: 0,
-          },
+          },  
         });
         break;
       }
